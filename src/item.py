@@ -14,10 +14,24 @@ class Item:
         :param quantity: Количество товара в магазине.
         """
 
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
+
+    @property
+    def getter_name(self):
+        return self.__name
+
+
+    @name.setter
+    """в сеттере name проверять, что длина наименования товара не больше 10 симвовов. 
+    В противном случае, обрезать строку (оставить первые 10 символов)."""
+    def name(self, lenght):
+        if len(lenght) <=10:
+            self.__name = lenght
+
+
 
 
     def calculate_total_price(self) -> str:

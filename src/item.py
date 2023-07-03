@@ -46,16 +46,17 @@ class Item:
     @name.setter
     """в сеттере name проверять, что длина наименования товара не больше 10 симвовов. 
     В противном случае, обрезать строку (оставить первые 10 символов)."""
-    def name(self, lenght):
+    def name(self, lenght: str):
         if len(lenght) <= 10:
             self.__name = lenght
     @classmethod
-    def instantiate_from_csv(path)
-    with open(path, newline='items.csv') as csvfile:
-        reader = csv.DictReader(csvfile)
-        try:
-            for row in reader:
-                path(row['name'], row['price'],
-                    row['quantity'])  # это дернет инит нашего класса, инит с тремя параметрами
-        except KeyError:
-            raise InstantiateCSVError("item.csv file is corrupted")
+    def instantiate_from_csv(cls, path):
+        with open(path, newline='items.csv') as csvfile:
+            reader = csv.DictReader(csvfile)
+            try:
+                for row in reader:
+                    path(row['name'], row['price'],
+                        row['quantity'])  # это дернет инит нашего класса, инит с тремя параметрами
+            except KeyError:
+                raise InstantiateCSVError("item.csv file is corrupted")
+

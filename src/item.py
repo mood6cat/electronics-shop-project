@@ -43,23 +43,28 @@ class Item:
         """
         self.price *= self.pay_rate
 
+    @property
+    def name(self):
+        return self.__name
+
     @name.setter
     def name(self, lenght: str):
         """в сеттере name проверять, что длина наименования товара не больше 10 симвовов.
             В противном случае, обрезать строку (оставить первые 10 символов)."""
         if len(lenght) <= 10:
             self.__name = lenght
-    @classmethod
-    def instantiate_from_csv(cls, path):
-        with open(path, newline='items.csv') as csvfile:
-            reader = csv.DictReader(csvfile)
-            try:
-                for row in reader:
-                    path(row['name'], row['price'],
-                        row['quantity'])  # это дернет инит нашего класса, инит с тремя параметрами
-            except KeyError:
-                raise InstantiateCSVError("item.csv file is corrupted")
 
     @staticmethod
     def string_to_number(value: str):
         return int(value)
+    @classmethod
+    def instantiate_from_csv(cls, file):
+        with open(file, newline='items.csv') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                name = row['name']
+                price = cls.string_to_number(row['price'])
+                quantity = cls.string_to_number(row['quantity'])
+
+                cls.all.append(cls(name, price, quantity))  # создаем экзмляры классы и кладем их в список
+

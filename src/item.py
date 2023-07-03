@@ -44,9 +44,9 @@ class Item:
         self.price *= self.pay_rate
 
     @name.setter
-    """в сеттере name проверять, что длина наименования товара не больше 10 симвовов. 
-    В противном случае, обрезать строку (оставить первые 10 символов)."""
     def name(self, lenght: str):
+        """в сеттере name проверять, что длина наименования товара не больше 10 симвовов.
+            В противном случае, обрезать строку (оставить первые 10 символов)."""
         if len(lenght) <= 10:
             self.__name = lenght
     @classmethod
@@ -60,3 +60,6 @@ class Item:
             except KeyError:
                 raise InstantiateCSVError("item.csv file is corrupted")
 
+    @staticmethod
+    def string_to_number(value: str):
+        return int(value)

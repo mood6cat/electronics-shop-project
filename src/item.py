@@ -59,7 +59,7 @@ class Item:
         return int(value)
     @classmethod
     def instantiate_from_csv(cls, file):
-        with open(file, newline='items.csv') as csvfile:
+        with open(file) as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 name = row['name']
@@ -68,3 +68,7 @@ class Item:
 
                 cls.all.append(cls(name, price, quantity))  # создаем экзмляры классы и кладем их в список
 
+
+
+
+Item.instantiate_from_csv("src/items.csv")

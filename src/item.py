@@ -24,9 +24,9 @@ class Item:
         self.all.append(self)
 
 
-    @property
-    def getter_name(self):
-        return self.__name
+    # @property
+    # def getter_name(self):
+    #     return self.__name
 
     def calculate_total_price(self) -> str:
         """
@@ -44,31 +44,34 @@ class Item:
         self.price *= self.pay_rate
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
-
     @name.setter
-    def name(self, lenght: str):
+    def name(self, name: str):
         """в сеттере name проверять, что длина наименования товара не больше 10 симвовов.
             В противном случае, обрезать строку (оставить первые 10 символов)."""
-        if len(lenght) <= 10:
-            self.__name = lenght
+        if len(name) <= 10:
+            self.__name = name
 
     @staticmethod
-    def string_to_number(value: str):
-        return int(value)
+    def string_to_number(value):
+        """Возвратить число из класса-строки"""
+        # print(int(value))
+        return int(float(value))
     @classmethod
     def instantiate_from_csv(cls, file):
         with open(file) as csvfile:
+            cls.all.clear()
             reader = csv.DictReader(csvfile)
+            # for row in reader:
+            #     name = row['name']
+            #     price = cls.string_to_number(row['price'])
+            #     quantity = cls.string_to_number(row['quantity'])
+            #     cls.all.append(cls(name, price, quantity))  # создаем экзмляры классы и кладем их в список
             for row in reader:
-                name = row['name']
-                price = cls.string_to_number(row['price'])
-                quantity = cls.string_to_number(row['quantity'])
-
-                cls.all.append(cls(name, price, quantity))  # создаем экзмляры классы и кладем их в список
+                cls(row['name'], row['price'],
+                    row['quantity'])  # это дернет инит нашего класса, инит с тремя параметрами
 
 
 
-
-Item.instantiate_from_csv("src/items.csv")
+Item.instantiate_from_csv("../src/items.csv")

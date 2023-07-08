@@ -22,6 +22,12 @@ def test_string_to_number(item):
     assert isinstance(item.string_to_number(item.quantity), int)
 
 def test_name_setter(item):
-    item.name="Мобила"
-    assert item.name=="Мобила"
+    item.name="Смартфон"
+    assert item.name=="Смартфон"
+    item.neme = "СуперСмартфон"
+    assert item.name == "Смартфон"
 
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5

@@ -47,11 +47,16 @@ class Item:
     def name(self) -> str:
         return self.__name
     @name.setter
-    def name(self, name: str):
+    def name(self, name):
         """в сеттере name проверять, что длина наименования товара не больше 10 симвовов.
             В противном случае, обрезать строку (оставить первые 10 символов)."""
-        if len(name) <= 10:
+        if len(name) >= 10:
+            self.__name = name[:10]
+            print(self.__name)
+        else:
             self.__name = name
+            print(self.__name)
+
 
     @staticmethod
     def string_to_number(value):
@@ -59,7 +64,7 @@ class Item:
         # print(int(value))
         return int(float(value))
     @classmethod
-    def instantiate_from_csv(cls, file):
+    def instantiate_from_csv(cls, file="../src/items.csv"):
         with open(file) as csvfile:
             cls.all.clear()
             reader = csv.DictReader(csvfile)

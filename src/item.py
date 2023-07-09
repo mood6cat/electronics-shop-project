@@ -23,10 +23,11 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
-    # @property
-    # def getter_name(self):
-    #     return self.__name
+    def __str__(self):
+        return f'{self.__name}'
 
     def calculate_total_price(self) -> str:
         """
@@ -52,10 +53,10 @@ class Item:
             В противном случае, обрезать строку (оставить первые 10 символов)."""
         if len(name) >= 10:
             self.__name = name[:10]
-            print(self.__name)
+
         else:
             self.__name = name
-            print(self.__name)
+
 
 
     @staticmethod

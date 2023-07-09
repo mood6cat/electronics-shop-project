@@ -18,12 +18,14 @@ def test_apply_discount(item):
     item.apply_discount()
     assert item.price == 5000.0
 
+
 def test_string_to_number(item):
     assert isinstance(item.string_to_number(item.quantity), int)
 
+
 def test_name_setter(item):
-    item.name="Смартфон"
-    assert item.name=="Смартфон"
+    item.name = "Смартфон"
+    assert item.name == "Смартфон"
     item.neme = "СуперСмартфон"
     assert item.name == "Смартфон"
 
@@ -31,3 +33,11 @@ def test_name_setter(item):
 def test_instantiate_from_csv():
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
+
+
+def test_repr(item):
+    assert repr(item) == "Item('test_item', 2500.0, 10)"
+
+
+def rest_str(item):
+    assert str(item) == 'Смартфон'

@@ -29,6 +29,14 @@ class Item:
     def __str__(self):
         return f'{self.__name}'
 
+    def __add__(self, other):
+        """Сложить по количеству товара"""
+        if isinstance(other, Item):  # Реализуйте проверки, чтобы нельзя было сложить
+            # Phone или Item с экземплярами не Phone или Item классов.
+            return self.quantity + other.quantity
+        else:
+            raise TypeError("Имена не совпадают")
+
     def calculate_total_price(self) -> str:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -56,6 +64,7 @@ class Item:
 
         else:
             self.__name = name
+
 
 
 
